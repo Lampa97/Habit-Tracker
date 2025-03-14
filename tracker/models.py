@@ -6,7 +6,7 @@ class Habit(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="habits", verbose_name="Owner")
     place = models.CharField(max_length=150, verbose_name="Place", null=True, blank=True)
     time = models.TimeField(verbose_name="Time", default="12:00")
-    action = models.CharField(max_length=150, verbose_name="Action", required=True)
+    action = models.CharField(max_length=150, verbose_name="Action")
     is_pleasant = models.BooleanField(default=True, verbose_name="Is pleasant")
     connected_habit = models.ForeignKey('self', on_delete=models.SET_NULL, related_name="habits", verbose_name="Connected habit", null=True, blank=True)
     periodicity_in_days = models.PositiveIntegerField(verbose_name="Periodicity in days", default=1, validators=[MaxValueValidator(7)])
