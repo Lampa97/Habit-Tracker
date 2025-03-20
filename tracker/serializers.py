@@ -9,6 +9,7 @@ class HabitSerializer(serializers.ModelSerializer):
         model = Habit
         fields = "__all__"
 
+
     def validate(self, data):
         habit = Habit(**data)
         if data.get('reward') and data.get('connected_habit'):

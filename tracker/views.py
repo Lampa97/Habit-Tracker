@@ -8,6 +8,9 @@ class HabitCreateAPIView(CreateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class PublicHabitListAPIView(ListAPIView):
     queryset = Habit.objects.filter(is_public=True)
