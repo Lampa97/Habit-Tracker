@@ -1,5 +1,7 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+from rest_framework.exceptions import ValidationError
+
 from users.models import User
 
 class Habit(models.Model):
