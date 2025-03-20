@@ -17,6 +17,7 @@ redis = "^5.2.1"
 eventlet = "^0.39.1"
 django-celery-beat = "^2.7.0"
 drf-spectacular = "^0.28.0"
+django-cors-headers = "^4.7.0"
 
 
 [tool.poetry.group.lint.dependencies]

@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from .models import User
 from .serializers import UserSerializer, UserTokenObtainPairSerializer
 
+
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -28,7 +29,7 @@ class UserTokenObtainPairView(TokenObtainPairView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
-        user = User.objects.get(email=request.data['email'])
+        user = User.objects.get(email=request.data["email"])
         user.last_login = timezone.now()
         user.save()
         return response
