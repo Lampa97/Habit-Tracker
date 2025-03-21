@@ -2,7 +2,9 @@ from celery import shared_task
 from django.utils import timezone
 
 from users.models import User
+
 from .services import send_tg_message
+
 
 @shared_task
 def send_habit_notification():
@@ -25,7 +27,7 @@ def send_habit_notification():
                     additional_text += f"Your reward will be {habit.reward}.\n"
 
                 text = f"""
-                Hey, {user.email}!\nDon't forget to complete your habit at {habit.time}: 
+                Hey, {user.email}!\nDon't forget to complete your habit at {habit.time}:
                 {habit.action} at {habit.place}!
                 You need {habit.time_to_finish} seconds to finish it.
                 {additional_text}

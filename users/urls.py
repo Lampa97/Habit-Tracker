@@ -3,7 +3,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 
 from users.apps import UsersConfig
 
-from .views import UserCreateAPIView, TgChatIDRetrieveAPIView, UserTokenObtainPairView, UserUpdateAPIView
+from .views import TgChatIDRetrieveAPIView, UserCreateAPIView, UserTokenObtainPairView, UserUpdateAPIView
 
 app_name = UsersConfig.name
 

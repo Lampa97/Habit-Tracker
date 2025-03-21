@@ -1,14 +1,14 @@
 from django.utils import timezone
-from rest_framework import generics, status
+from rest_framework import generics
 from rest_framework.exceptions import NotFound
 from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 from .permissions import IsSameUser
-from .serializers import UserSerializer, TgChatIdSerializer, UserTokenObtainPairSerializer
+from .serializers import TgChatIdSerializer, UserSerializer, UserTokenObtainPairSerializer
 from .services import get_tg_chat_id
+
 
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -30,6 +30,7 @@ class UserUpdateAPIView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsSameUser,)
+
 
 class UserTokenObtainPairView(TokenObtainPairView):
     serializer_class = UserTokenObtainPairSerializer

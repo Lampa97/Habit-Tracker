@@ -17,6 +17,7 @@ class TgChatIdSerializer(serializers.ModelSerializer):
         model = User
         fields = ["email", "tg_chat_id"]
 
+
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):

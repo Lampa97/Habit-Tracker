@@ -9,5 +9,8 @@ admin.site.register(User)
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("id", "email",)
+    list_display = (
+        "id",
+        "email",
+    )
     search_fields = ("email",)
