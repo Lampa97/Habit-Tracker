@@ -17,6 +17,7 @@ class HabitCreateAPIView(CreateAPIView):
 
 class PublicHabitListAPIView(ListAPIView):
     queryset = Habit.objects.filter(is_public=True)
+    pagination_class = CustomPagination
     serializer_class = HabitSerializer
 
 

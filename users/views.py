@@ -1,11 +1,14 @@
 from django.utils import timezone
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.exceptions import NotFound
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
-from .serializers import UserSerializer, UserTokenObtainPairSerializer
-
+from .permissions import IsSameUser
+from .serializers import UserSerializer, TgChatIdSerializer, UserTokenObtainPairSerializer
+from .services import get_tg_chat_id
 
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -23,6 +26,11 @@ class UserCreateAPIView(generics.CreateAPIView):
         user.save()
 
 
+class UserUpdateAPIView(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = (IsSameUser,)
+
 class UserTokenObtainPairView(TokenObtainPairView):
     serializer_class = UserTokenObtainPairSerializer
     permission_classes = [AllowAny]
@@ -33,3 +41,19 @@ class UserTokenObtainPairView(TokenObtainPairView):
         user.last_login = timezone.now()
         user.save()
         return response
+
+
+class TgChatIDRetrieveAPIView(generics.RetrieveAPIView):
+    serializer_class = TgChatIdSerializer
+
+    def get_object(self):
+        chat_id = self.request.user.tg_chat_id
+        if chat_id:
+            return User.objects.get(tg_chat_id=chat_id)
+        user = User.objects.get(email=self.request.user.email)
+        chat_id = get_tg_chat_id()
+        if chat_id:
+            user.tg_chat_id = chat_id
+            user.save()
+            return user
+        raise NotFound(detail="Telegram ID not found. Please update your profile with your telegram_id.")

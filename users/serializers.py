@@ -8,8 +8,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["id", "email", "password"]
+        fields = ["id", "email", "password", "tg_chat_id"]
 
+
+class TgChatIdSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ["email", "tg_chat_id"]
 
 class UserTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
