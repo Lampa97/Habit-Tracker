@@ -10,10 +10,14 @@ from .services import send_tg_message
 def send_habit_notification():
     all_users = User.objects.all()
     for user in all_users:
+        habit_counter = 0
         if user.tg_chat_id:
             chat_id = user.tg_chat_id
+            hello_text = f"Hello, {user.email}! Here is overview of your habits!"
+            send_tg_message(hello_text, chat_id)
             user_habits = user.habits.all()
             for habit in user_habits:
+                habit_counter += 1
                 last_scheduled = habit.last_scheduled or timezone.now()
                 habit.last_scheduled = last_scheduled
                 habit.save()
@@ -27,7 +31,8 @@ def send_habit_notification():
                     additional_text += f"Your reward will be {habit.reward}.\n"
 
                 text = f"""
-                Hey, {user.email}!\nDon't forget to complete your habit at {habit.time}:
+                Habit #{habit_counter}: 
+                {habit.time}
                 {habit.action} at {habit.place}!
                 You need {habit.time_to_finish} seconds to finish it.
                 {additional_text}
