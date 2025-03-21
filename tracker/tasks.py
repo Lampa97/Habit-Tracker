@@ -13,9 +13,12 @@ def send_habit_notification():
         habit_counter = 0
         if user.tg_chat_id:
             chat_id = user.tg_chat_id
-            hello_text = f"Hello, {user.email}! Here is overview of your habits!"
-            send_tg_message(hello_text, chat_id)
             user_habits = user.habits.all()
+            if user_habits:
+                hello_text = f"Hello, {user.email}! Here is overview of your habits!"
+            else:
+                hello_text = f"Hello, {user.email}! You have no habits yet. Create them in the app!"
+            send_tg_message(hello_text, chat_id)
             for habit in user_habits:
                 habit_counter += 1
                 last_scheduled = habit.last_scheduled or timezone.now()
