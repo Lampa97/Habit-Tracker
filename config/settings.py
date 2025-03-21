@@ -161,12 +161,12 @@ CELERY_TASK_TRACK_STARTED = True
 
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
-# CELERY_BEAT_SCHEDULE = {
-#     'check_user_status': {
-#         'task': 'users.tasks.check_user_status',  # Путь к задаче
-#         'schedule': timedelta(days=1),  # Расписание выполнения задачи (например, каждые 10 минут)
-#     },
-# }
+CELERY_BEAT_SCHEDULE = {
+    'send_habit_notification': {
+        'task': 'tracker.tasks.send_habit_notification',  # Путь к задаче
+        'schedule': timedelta(days=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.getenv("EMAIL_HOST")

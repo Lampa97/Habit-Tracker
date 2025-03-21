@@ -18,6 +18,7 @@ class Habit(models.Model):
     periodicity_in_days = models.PositiveIntegerField(
         verbose_name="Periodicity in days", default=1, validators=[MaxValueValidator(7), MinValueValidator(1)]
     )
+    last_scheduled = models.DateField(verbose_name="Last scheduled", null=True, blank=True)
     reward = models.CharField(max_length=150, verbose_name="Reward", null=True, blank=True)
     time_to_finish = models.PositiveIntegerField(
         verbose_name="Period", null=True, blank=True, validators=[MaxValueValidator(120)]
