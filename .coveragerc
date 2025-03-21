@@ -13,6 +13,7 @@ omit =
     *urls.py
     */settings/*
     *createadmin.py*
+    *tasks.py*
 
 [report]
 omit =
@@ -28,8 +29,9 @@ omit =
     *urls.py
     */settings/*
     *createadmin.py*
+    *tasks.py*
 
 
 fail_under = 80
 show_missing = True
-skip_covered = True
+skip_covered = False

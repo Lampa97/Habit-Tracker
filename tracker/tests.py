@@ -1,10 +1,25 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
+from django.conf import settings
 
 from users.models import User
 from tracker.models import Habit
+from django.test import TestCase
+from unittest.mock import patch
+from tracker.tasks import send_habit_notification
+from tracker.services import send_tg_message
 
+
+class SendTgMessageServiceTests(TestCase):
+
+    @patch('tracker.services.requests.get')
+    def test_send_tg_message(self, mock_get):
+        send_tg_message('Test message', '123456')
+        mock_get.assert_called_once_with(
+            f'https://api.telegram.org/bot{settings.TELEGRAM_BOT_TOKEN}/sendMessage',
+            params={'text': 'Test message', 'chat_id': '123456'}
+        )
 
 class HabitTestCase(APITestCase):
     def setUp(self):
