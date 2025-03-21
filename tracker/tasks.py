@@ -34,7 +34,7 @@ def send_habit_notification():
                     additional_text += f"Your reward will be {habit.reward}.\n"
 
                 text = f"""
-                Habit #{habit_counter}: 
+                Habit #{habit_counter}:
                 {habit.time}
                 {habit.action} at {habit.place}!
                 You need {habit.time_to_finish} seconds to finish it.
