@@ -77,7 +77,6 @@ jobs:
           echo "REDIS_HOST=memory://" >> .env
           echo "CELERY_BROKER_URL=memory://" >> .env
           echo "CELERY_RESULT_BACKEND=django-db" >> .env
-          cat .env
 
 
       - name: Run migrate
@@ -119,8 +118,8 @@ jobs:
             ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             
             echo "Step 1: Pulling the latest code from the repository"
-            cd Online_courses
-            git checkout develop
+            cd Habit_Tracker
+            git checkout ci_cd
             git pull
                     
             echo "Step 2: Creating static folder"
