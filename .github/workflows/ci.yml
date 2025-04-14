@@ -118,7 +118,7 @@ jobs:
             ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             
             echo "Step 1: Pulling the latest code from the repository"
-            cd Habit_Tracker
+            cd Habit-Tracker
             git checkout ci_cd
             git pull
                     
