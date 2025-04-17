@@ -119,7 +119,7 @@ jobs:
             
             echo "Step 1: Pulling the latest code from the repository"
             cd Habit-Tracker
-            git checkout ci_cd
+            git checkout develop
             git pull
                     
             echo "Step 2: Creating static folder"
